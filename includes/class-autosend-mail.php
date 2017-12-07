@@ -25,7 +25,7 @@
  * @since      1.0.0
  * @package    Autosend_Mail
  * @subpackage Autosend_Mail/includes
- * @author     Mikko Heikkilä | Hungry <mikko.heikkila@hungry.fi>
+ * @author     Mikko Heikkilä <mikko.heikkila@hungry.fi>
  */
 class Autosend_Mail {
 
@@ -67,8 +67,8 @@ class Autosend_Mail {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
-			$this->version = PLUGIN_NAME_VERSION;
+		if ( defined( 'AUTOSEND_MAIL_VERSION' ) ) {
+			$this->version = AUTOSEND_MAIL_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
@@ -216,3 +216,50 @@ class Autosend_Mail {
 	}
 
 }
+
+/**
+ * Add shortcode for displaying form for adding new recipients to the mailing list.
+ */
+function wpam_add_address(){ 
+
+	if(isset($_POST['wpam_new_address'])){
+
+		/************** POST DATA **************/
+
+		$email = trim($_POST['wpam_new_address']);
+
+		/**************** WPDB ****************/
+
+		global $wpdb;
+
+		$table_name = ($wpdb->prefix . 'autosend_mail_recipients');
+
+
+		if(( $wpdb->insert( $table_name, array( 'email' => $email ), array( '%s' ) )) === FALSE){
+
+			//FAIL
+
+		} else {
+
+			//SUCCESS
+
+		}
+
+	}
+
+	/**************** FORM ****************/
+
+	?>
+
+	<form id="wpam_input_form" method="POST" action="" role="form">
+
+		<?php _e('Email'); ?>: <input type="email" name="wpam_new_address" required><br> 
+
+		<input type="submit" name="Submit" value="<?php _e('Submit'); ?>" id="submit">
+
+	</form>
+
+	<?php
+}
+add_shortcode('wpam_input_form', 'wpam_add_address');
+	
