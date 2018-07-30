@@ -5,6 +5,4 @@ I have had to make some sort of automatic newsletter for multiple projects now. 
 
 <b>Coding required for customizing the actual message that you want to send.</b> So this won't work right out of the box. But hopefully this is exactly what you want.
 
-Any and all help/criticism is much appreciated :)
-
 The plugin boilerplate was generated using WORDPRESS PLUGIN BOILERPLATE GENERATOR https://wppb.me/
